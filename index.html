@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AN MARKETING DIGITAL | E-Commerce Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta Ultra Premium */
+        :root {
+            --bg-dark: #030303;
+            --bg-card: #0d0d0d;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --neon-green: #39ff14;
+            --neon-red: #ff073a;
+            --glass-bg: rgba(13, 13, 13, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Roboto', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Banner de Urgencia */
+        .urgency-banner {
+            background: linear-gradient(90deg, #000, var(--neon-red), #000); color: white; text-align: center;
+            padding: 8px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; position: fixed; top: 0; width: 100%; z-index: 1001;
+            animation: pulseBg 3s infinite;
+        }
+        @keyframes pulseBg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* Header & Icono del Carrito */
+        header {
+            position: fixed; top: 32px; width: 100%; background: var(--glass-bg); backdrop-filter: blur(12px);
+            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid rgba(57, 255, 20, 0.15);
+        }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 10px rgba(57, 255, 20, 0.4); }
+        .logo span { color: var(--neon-red); text-shadow: 0 0 10px rgba(255, 7, 58, 0.4); }
+        
+        .cart-trigger {
+            background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green);
+            padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            transition: 0.4s; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 10px rgba(57, 255, 20, 0.1);
+        }
+        .cart-trigger:hover { background: var(--neon-green); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); }
+        .cart-badge { background: var(--neon-red); color: #fff; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; }
+
+        /* Sidebar del Carrito */
+        .cart-sidebar {
+            position: fixed; top: 0; right: -100%; width: 400px; max-width: 100%; height: 100vh;
+            background: #080808; border-left: 2px solid var(--neon-green); z-index: 9999;
+            transition: 0.5s ease-in-out; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { color: var(--neon-green); font-size: 1.5rem; }
+        .close-cart { background: none; border: none; color: var(--neon-red); font-size: 1.5rem; cursor: pointer; font-weight: bold; }
+        .close-cart:hover { transform: scale(1.2); }
+        
+        .cart-items-container { flex-grow: 1; overflow-y: auto; padding: 25px; }
+        .empty-cart-msg { text-align: center; color: var(--text-muted); margin-top: 50px; font-size: 1.1rem; }
+        
+        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #111; padding: 10px; border-radius: 8px; border: 1px solid rgba(57,255,20,0.2); }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; color: #fff; }
+        .remove-item { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+        
+        .cart-footer { padding: 25px; border-top: 1px solid rgba(255,255,255,0.1); background: #030303; }
+        
+        /* Overlay del carrito */
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9998; display: none; backdrop-filter: blur(5px); }
+        .cart-overlay.show { display: block; }
+
+        /* Botones Globales */
+        .btn-buy {
+            display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; background: transparent;
+            border: 2px solid var(--neon-green); color: var(--neon-green); font-weight: 900; font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; border-radius: 8px; transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; z-index: 1;
+        }
+        .btn-buy::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--neon-green); transition: 0.4s; z-index: -1; }
+        .btn-buy:hover::before { left: 0; }
+        .btn-buy:hover { color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); }
+
+        .btn-whatsapp-cart { background: var(--neon-red); border-color: var(--neon-red); color: #fff; }
+        .btn-whatsapp-cart::before { background: #fff; }
+        .btn-whatsapp-cart:hover { color: var(--neon-red); box-shadow: 0 0 20px var(--neon-red); }
+
+        /* Hero */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(to bottom, rgba(3,3,3,0.8), rgba(3,3,3,1)), url('https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/506340972_651369564589800_8605899084790965579_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=2a1932&_nc_ohc=SzMbp-mqM_wQ7kNvwERVYjq&_nc_oc=AdlnumZl99rOgFJ8WcyrCLc7xE0RTAyPHGmAyAGmrV-Y5cJbQuI2j4scPJpu9mo_znP-wDWyQljRNbqrVKdots5Z&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=57sBfs3zVlYk6eJ3RHYDTQ&_nc_ss=8&oh=00_AfwoWrkPTE7cmxQiI-V2XvGLEWMMzimIQsn3lP1QYQKr9A&oe=69ADC80F') center/cover fixed;
+            padding: 0 20px;
+        }
+        .hero-content h1 { font-size: 5rem; font-weight: 900; margin-bottom: 10px; animation: slideUp 1s ease-out; }
+        .hero-content h2 { font-size: 2rem; color: var(--neon-green); margin-bottom: 25px; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+
+        /* Tienda */
+        .section-padding { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 10px; }
+        .section-title h2 span { color: var(--neon-red); }
+        
+        .grid-store { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .product-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden; transition: all 0.4s ease; display: flex; flex-direction: column; }
+        .product-card:hover { border-color: var(--neon-red); box-shadow: 0 10px 30px rgba(255, 7, 58, 0.15); transform: translateY(-5px); }
+        .product-img { width: 100%; height: 250px; object-fit: cover; border-bottom: 2px solid var(--neon-red); filter: grayscale(20%); transition: 0.5s; }
+        .product-card:hover .product-img { filter: grayscale(0%); border-color: var(--neon-green); }
+        .product-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info h3 { font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+        
+        /* Acordeón */
+        .toggle-details { background: none; border: none; color: var(--neon-red); font-weight: bold; cursor: pointer; text-align: left; padding: 0; margin-bottom: 15px; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .toggle-details:hover { color: var(--neon-green); }
+        .detailed-content { max-height: 0; overflow: hidden; transition: 0.5s ease-out; opacity: 0; }
+        .detailed-content.open { max-height: 500px; opacity: 1; margin-bottom: 20px; }
+        .detailed-content ul { padding-left: 20px; color: #ccc; font-size: 0.9rem; margin-top: 10px; }
+        .detailed-content li { margin-bottom: 8px; }
+
+        /* Botón Flotante WhatsApp */
+        .float-ws {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--neon-green); color: #000;
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 35px; box-shadow: 0 0 20px rgba(57,255,20,0.6);
+            z-index: 990; transition: 0.3s;
+            animation: pulse-ws 2s infinite;
+        }
+        .float-ws:hover { transform: scale(1.1); background: #fff; color: var(--neon-green); }
+        @keyframes pulse-ws {
+            0% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(57, 255, 20, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+        }
+
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
+            header { padding: 15px; flex-direction: column; gap: 15px; }
+            .cart-sidebar { width: 100%; }
+            .float-ws { bottom: 20px; right: 20px; width: 55px; height: 55px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="urgency-banner">🔥 ARMA TU PAQUETE DE SERVICIOS VIP HOY 🔥</div>
+
+    <header>
+        <a href="#" class="logo">AN <span>MARKETING</span></a>
+        <button class="cart-trigger" onclick="abrirCarrito()">
+            TU PAQUETE <span class="cart-badge" id="cart-counter">0</span>
+        </button>
+    </header>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="cerrarCarrito()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>PAQUETE VIP</h3>
+            <button class="close-cart" onclick="cerrarCarrito()">X</button>
+        </div>
+        <div class="cart-items-container" id="cart-items-container">
+            <div class="empty-cart-msg">Aún no has seleccionado ningún servicio.</div>
+        </div>
+        <div class="cart-footer">
+            <button onclick="generarPedidoWhatsApp()" class="btn-buy btn-whatsapp-cart">COTIZAR PROYECTO AHORA ⚡</button>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 10px;">El pedido se enviará a nuestro WhatsApp corporativo.</p>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AN MARKETING DIGITAL</h1>
+            <h2>TU MEJOR OPCIÓN EN LEÓN, GTO.</h2>
+            <p>Selecciona los servicios que tu negocio necesita, agrégalos a tu paquete VIP y obtén una cotización inmediata y personalizada.</p>
+            <a href="#tienda" class="btn-buy" style="max-width: 300px; margin: 0 auto; background: var(--neon-red); border-color: var(--neon-red); color: white;">EXPLORAR SERVICIOS</a>
+        </div>
+    </section>
+
+    <section id="tienda" class="section-padding reveal">
+        <div class="section-title">
+            <h2>NUESTRO <span>CATÁLOGO</span></h2>
+            <p>AÑADE SERVICIOS A TU CARRITO PARA CREAR TU PROYECTO</p>
+        </div>
+        
+        <div class="grid-store" id="productos-container">
+            </div>
+    </section>
+
+    <footer style="padding: 50px 5%; text-align: center; background: #000; border-top: 2px solid var(--neon-green);">
+        <h2 style="color: var(--text-main); margin-bottom: 10px; font-weight: 900;">AN MARKETING DIGITAL</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">León, Guanajuato, México.</p>
+        <div style="margin-bottom: 20px;">
+            <a href="https://www.facebook.com/profile.php?id=100091502874923" target="_blank" style="margin: 0 10px; color: #fff;">Facebook</a>
+            <a href="https://www.instagram.com/anmarketing.digital" target="_blank" style="margin: 0 10px; color: #fff;">Instagram</a>
+            <a href="https://www.tiktok.com/@an_marketing_digital?is_from_webapp=1&sender_device=pc" target="_blank" style="margin: 0 10px; color: #fff;">TikTok</a>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/524778579202?text=Hola%20AN%20MARKETING%20DIGITAL,%20me%20gustar%C3%ADa%20recibir%20atenci%C3%B3n%20personalizada%20y%20m%C3%A1s%20informaci%C3%B3n." target="_blank" class="float-ws" title="Contáctanos">
+        <svg width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.362 2.76 1.053 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <script>
+        const servicios = [
+            { 
+                id: 1, 
+                titulo: "Manejo de Redes Sociales", 
+                desc: "Gestión experta para escalar tu comunidad.", 
+                detalles: ["Aumento de visibilidad.", "Diseño de parrilla de contenidos mensual."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/480891973_567552779638146_2684624776564754435_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeFGCQqW4_oLfYkbzAZkQ5av4MF3aktAf2HgwXdqS0B_YTsGuszSnG9RdBjLeefz543260Hu0oYtojSYiL9ACJa6&_nc_ohc=7WUZOlBL_jgQ7kNvwGFQq5-&_nc_oc=Adl1qHhFf3nuDQC3tRs90_Nh-4kVK3hyHCEP0g-fHugFONfI7VCnrr2tt5OJDo21S_bzk-j7_fsq6x6fjDhv9tUJ&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=uHp6YMpXn813LcFPxIH9yw&_nc_ss=8&oh=00_Afy0K_XQhyH32oXDUY9zejtrKqSFZiBebXqSfCP7JebRJg&oe=69AF0CA4" 
+            },
+            { 
+                id: 2, 
+                titulo: "Creación de Contenido", 
+                desc: "Fotografía y video que atrapa la atención.", 
+                detalles: ["Sesiones premium.", "Edición para Reels/TikToks."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/491256369_611339741926116_3244242380457365413_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeFwZmqtawlpJXKuIF9v4DDVfgHMWZZO7dN-AcxZlk7t02pFcvSONsf742CZP5bXI0v_0SEEEqY6czYl3oGtwSK4&_nc_ohc=4Z_jjGwQUv0Q7kNvwFVgKX_&_nc_oc=AdmNVD2lnelVW9LhdP8CwwEjNMMWjCr_AB3vSoZ79Dg6F-ZxFE7LcnfWmv5AngdMMxJrEt-6Bxw3vYcUYrZtQnhO&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=fdGWfsOdo_3rZtTnaqIvqA&_nc_ss=8&oh=00_AfzJ_BUUL5OVuEQWNhr0MN9bgy9miHnVRFiPOcNUAc0X-g&oe=69AF0DAE" 
+            },
+            { 
+                id: 3, 
+                titulo: "Campañas Publicitarias", 
+                desc: "Lanzamientos SEM precisos y rentables.", 
+                detalles: ["Segmentación dirigida.", "Reportes de ROI."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/497430563_630370516689705_2197677405554879636_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeFgb9SG-MyOzrJsN7WJyuT3BMf4ZBfsE70Ex_hkF-wTvfbMEmL3iCIiBhI6QM4dSioYbmIy86iiaXKpn-DDk_fE&_nc_ohc=ml4GRCkVKacQ7kNvwE19yOu&_nc_oc=AdlqzYsXH0IPhCgXXxnyevBtA3T-5NUDZjcf93NZ-jTO_T0qEU-P5cmndoRsQDq-YBdOe24X7mGpnKCARinWYH9D&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=vfuJ2YK_EjsyRReRNuw7_A&_nc_ss=8&oh=00_AfyksYhZrWZDisL9X2gZkLPsWChI9RDD5JX105l-SmK3pw&oe=69AF1536" 
+            },
+            { 
+                id: 4, 
+                titulo: "Desarrollo Web & E-commerce", 
+                desc: "Tu negocio listo para vender online.", 
+                detalles: ["Pasarelas de pago.", "Diseño para conversión."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/504423658_646922198367870_8630971587836526748_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeHp6TTAB2WSw2NP4dizRzKY5O820yCpop7k7zbTIKminncApRvnHWx8YB8p13_UtSuGfZSJrl8-LHrMtd8kGAVj&_nc_ohc=W4cZwQLXmCEQ7kNvwGEFaQy&_nc_oc=AdnPV-NBo8deXLo6myENIbi3fb7a1WoGcr3_2MvfmVFXJAaAMYxW8sY7u_FeBsVatKqKk2tGKH7avHGOT2Gq86Nc&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=Hbx-_losj_yMvE2i-Kunuw&_nc_ss=8&oh=00_AfzBpUpSsi3BgJh9oiTUeH4KRwY3DyhyUEdzPj9pYo96sw&oe=69AF28B4" 
+            },
+            { 
+                id: 5, 
+                titulo: "Diseño de Logotipos & Flyers", 
+                desc: "Identidad visual premium.", 
+                detalles: ["Manual de Identidad.", "Material gráfico para redes."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/518139738_676048595455230_2954951325272114590_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeEE5ipblxfO-6xTt0iqhORG2Wi9knbSnKLZaL2SdtKcom9ovcgtJuMQ_8c_CyOotSQBHpvdAGKV31ihTj3hmcRB&_nc_ohc=zzsPgaAQB5IQ7kNvwHh6Gos&_nc_oc=AdlguLgpaWyr54wPMNN6NZAStublk6sEJqR40BYi6woZWLVjcg-XwYLOzjHfeM8SJ1gkr4sAxSa0F29Ud5fLiP2y&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=_QNiJlUx8oqUl3lnRJnkxA&_nc_ss=8&oh=00_AfznEdHs0lUf7n4-hk03-Qswugof5QA7u756t0M41xNGaw&oe=69AF0FB2" 
+            },
+            { 
+                id: 6, 
+                titulo: "Automatizaciones & Bots", 
+                desc: "Flujos de respuesta para no perder clientes.", 
+                detalles: ["Atención 24/7.", "Calificación de leads."], 
+                img: "https://scontent.fcyw1-1.fna.fbcdn.net/v/t39.30808-6/627049061_842234982169923_2090910812866621545_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeGThCq8sXXG6CbA1cymj7rrj4C2pzAZFxqPgLanMBkXGmL_QldnrH4EEg-zAJ1ALxTLZlf-9mneGAIQ9pkioPL-&_nc_ohc=zRUJhs36_foQ7kNvwExf1ZY&_nc_oc=Adl-dwf3ukCyyWZsuagJOtHkBFEd0BoCWG-ss9O6Sg-IHQqqwMs8bd_67HRVEhPKqb5YM5paRmMbvSPMmzs-usff&_nc_zt=23&_nc_ht=scontent.fcyw1-1.fna&_nc_gid=8wvQaSdKYpoVl1JzqKcvug&_nc_ss=8&oh=00_AfyhdIlljmSslEtelEbyoBGAyr0FeAPsIYrmwyuszgW30A&oe=69AF294E" 
+            }
+        ];
+
+        let carrito = [];
+        const numWhatsApp = "524778579202";
+
+        // Renderizar Productos en Pantalla
+        const container = document.getElementById('productos-container');
+        servicios.forEach((serv, index) => {
+            let listaDetalles = serv.detalles.map(item => `<li>${item}</li>`).join('');
+            const html = `
+                <div class="product-card">
+                    <img src="${serv.img}" alt="${serv.titulo}" class="product-img">
+                    <div class="product-info">
+                        <h3>${serv.titulo}</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">${serv.desc}</p>
+                        
+                        <button class="toggle-details" onclick="toggleDetails(${index})">
+                            Ver detalles
+                            <svg width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="detailed-content" id="detail-${index}"><ul>${listaDetalles}</ul></div>
+
+                        <button onclick="agregarAlCarrito(${serv.id})" class="btn-buy">
+                            + AÑADIR A MI PAQUETE
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += html;
+        });
+
+        // FUNCIONES DEL CARRITO
+        function abrirCarrito() {
+            document.getElementById('cart-sidebar').classList.add('open');
+            document.getElementById('cart-overlay').classList.add('show');
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('cart-sidebar').classList.remove('open');
+            document.getElementById('cart-overlay').classList.remove('show');
+        }
+
+        function agregarAlCarrito(id) {
+            const servicio = servicios.find(s => s.id === id);
+            // Evitar duplicados
+            if (carrito.some(item => item.id === id)) {
+                alert(`"${servicio.titulo}" ya está en tu paquete.`);
+                abrirCarrito();
+                return;
+            }
+            carrito.push(servicio);
+            actualizarUI();
+            abrirCarrito();
+        }
+
+        function eliminarDelCarrito(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarUI();
+        }
+
+        function actualizarUI() {
+            // Actualizar contador
+            document.getElementById('cart-counter').innerText = carrito.length;
+            
+            // Actualizar lista visual
+            const contenedorCarrito = document.getElementById('cart-items-container');
+            if (carrito.length === 0) {
+                contenedorCarrito.innerHTML = '<div class="empty-cart-msg">Aún no has seleccionado ningún servicio.</div>';
+                return;
+            }
+
+            let htmlCarrito = '';
+            carrito.forEach(item => {
+                htmlCarrito += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.titulo}">
+                        <div class="cart-item-info">
+                            <h4>${item.titulo}</h4>
+                            <button class="remove-item" onclick="eliminarDelCarrito(${item.id})">Quitar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            contenedorCarrito.innerHTML = htmlCarrito;
+        }
+
+        // GENERAR PEDIDO A WHATSAPP
+        function generarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                alert("Por favor, selecciona al menos un servicio para cotizar.");
+                return;
+            }
+
+            let mensaje = "🔥 *NUEVA SOLICITUD DE PROYECTO VIP* 🔥\n\nHola AN MARKETING DIGITAL. Me interesa cotizar el siguiente paquete de servicios:\n\n";
+            
+            carrito.forEach(item => {
+                mensaje += `✅ ${item.titulo}\n`;
+            });
+
+            mensaje += "\n¿Podemos agendar una asesoría para ver los detalles?";
+
+            // Redirigir a WhatsApp con el texto codificado
+            const url = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        // Utilidades Visuales (Acordeón y Scroll)
+        function toggleDetails(index) {
+            const content = document.getElementById(`detail-${index}`);
+            content.classList.toggle('open');
+        }
+
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        reveals.forEach(reveal => observer.observe(reveal));
+
+    </script>
+</body>
+</html>
