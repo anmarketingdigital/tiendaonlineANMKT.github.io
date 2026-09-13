@@ -37,7 +37,7 @@
                 radial-gradient(circle at 15% 50%, rgba(0, 255, 102, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 85% 30%, rgba(255, 0, 60, 0.05) 0%, transparent 40%),
                 linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)),
-                url("Fondo%20aene.png");
+                url("Fondo aene.png"); /* Imagen de fondo ajustada */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -173,6 +173,27 @@
         .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
         .card-red .price { color: var(--neon-red); }
         
+        /* Select para variantes de sistemas (Beta/Pro) */
+        .system-variant {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #111;
+            color: white;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: 0.3s;
+            appearance: none; /* Estilo personalizado */
+        }
+        .system-variant:focus, .system-variant:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0,255,102,0.2);
+        }
+
         .btn-add {
             width: 100%; padding: 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
             color: white; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: 700; 
@@ -256,8 +277,7 @@
 
     <header id="header">
         <a href="#" class="logo-container">
-            <!-- AQUÍ ESTÁ EL NUEVO LOGOTIPO DIRECTO DESDE EL REPOSITORIO (CON RESPALDO EN LA NUBE) -->
-            <img src="Logotipo%20AENE.jpg" alt="Logo AN Marketing Digital" class="logo-img" onerror="this.onerror=null; this.src='https://i.postimg.cc/3Jfc3QrF/logo-AENE.jpg';">
+            <img src="Logotipo AENE.jpg" alt="Logo AN Marketing Digital" class="logo-img" onerror="this.onerror=null; this.src='https://i.postimg.cc/3Jfc3QrF/logo-AENE.jpg';">
             <div class="logo-text">
                 AN <span>MARKETING</span>
             </div>
@@ -291,7 +311,7 @@
     </section>
 
     <footer style="padding: 50px 5%; text-align: center; border-top: 1px solid rgba(0,255,102,0.2); margin-top: 50px; background: #000;">
-        <img src="Logotipo%20AENE.jpg" alt="AN Marketing Digital" onerror="this.onerror=null; this.src='https://i.postimg.cc/3Jfc3QrF/logo-AENE.jpg';" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--neon-green);">
+        <img src="Logotipo AENE.jpg" alt="AN Marketing Digital" onerror="this.onerror=null; this.src='https://i.postimg.cc/3Jfc3QrF/logo-AENE.jpg';" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--neon-green);">
         <h3 style="font-family: var(--font-title); color: white; margin-bottom: 10px; text-transform: uppercase;">AN MARKETING DIGITAL</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem;">Estrategia + Contenido + Publicidad + Tecnología</p>
     </footer>
@@ -343,9 +363,11 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
         AOS.init({ once: true, offset: 50 });
 
+        // Imágenes con nombres exactos solucionadas (mayúsculas y acentos respetados)
         const productos = [
             // ESCALAMIENTO
             { id: 1, cat: 'escalamiento', titulo: 'Paquete Emprendedor', desc: '8 Flyers y 4 Videos Publicitarios.\nGestión FB & IG.\n*No incluye inversión en FB Ads.', precio: 3499, tipo: 'mes', badge: '', theme: '', img: 'Paquete emprendedor.png' },
@@ -362,21 +384,21 @@
             { id: 10, cat: 'marca', titulo: 'Invitación Digital en Video', desc: 'Diseño 100% Personalizado en video.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Invitación Digital en Video.png' },
             { id: 11, cat: 'marca', titulo: 'Catálogos Digitales', desc: '100% Personalizados.\n*Cotización basada en cantidad de productos.', precio: 0, tipo: 'cotizar', badge: '', theme: '', img: 'Catálogos Digitales.png' },
             
-            // PUBLICIDAD Y PRODUCCIÓN
+            // PUBLICIDAD Y PRODUCCIÓN (Imágenes corregidas)
             { id: 12, cat: 'produccion', titulo: 'Campañas FB/IG Ads', desc: 'Segmentación, generación de leads y optimización de ventas.\n*No incluye inversión (según presupuesto).', precio: 499, tipo: 'unico', badge: 'Ads', theme: '', img: 'Campañas FBIG Ads.png' },
             { id: 13, cat: 'produccion', titulo: '1 Video Publicitario', desc: 'Contenido 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: '1 Vídeo Publicitario.png' },
             { id: 14, cat: 'produccion', titulo: '2 Videos Publicitarios', desc: 'Contenido 100% Personalizado en paquete.', precio: 999, tipo: 'unico', badge: 'Ahorro', theme: 'card-red', img: '2 vídeos Publicitarios.png' },
             { id: 15, cat: 'produccion', titulo: 'Fotografía de Productos', desc: 'Sesión para 10 productos.\nEdición pro y contenido apoyado con IA.', precio: 1499, tipo: 'unico', badge: 'IA+', theme: '', img: 'Fotografía de Productos.png' },
 
-            // SISTEMAS PRO / WEB
-            { id: 16, cat: 'sistemas', titulo: 'RestoPOS', desc: 'Sistema de comandero para comida. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: 'Hot', theme: 'card-red', img: 'RestoPOS.png' },
-            { id: 17, cat: 'sistemas', titulo: 'E-Commerce', desc: 'Tienda online con carrito y métodos de pago integrados (Única Versión).', precio: 7000, tipo: 'desde', badge: '', theme: '', img: 'E-Commerce.png' },
-            { id: 18, cat: 'sistemas', titulo: 'Landing Page', desc: 'Páginas web profesionales totalmente personalizadas. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'landing page.png' },
-            { id: 19, cat: 'sistemas', titulo: 'BarberPRO', desc: 'Gestión de citas, pagos y cortes para barberías. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'BarberPRO.png' },
-            { id: 20, cat: 'sistemas', titulo: 'MotoPartesPRO', desc: 'Especializado en refacciones de motos. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'MotoPartesPRO.png' },
-            { id: 21, cat: 'sistemas', titulo: 'SorteoPRO', desc: 'Venta de boletos y gestión de premios. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'SorteoPRO.png' },
-            { id: 22, cat: 'sistemas', titulo: 'InventarioPRO', desc: 'Control de entradas y salidas para empresas. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'InventarioPRO.png' },
-            { id: 23, cat: 'sistemas', titulo: 'ChecadorPRO', desc: 'Asistencia y nómina digital personalizada. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: 'Útil', theme: '', img: 'ChecadorPRO.png' },
+            // SISTEMAS PRO / WEB (Se agregaron opciones BETA/PRO a todos, incluyendo E-Commerce)
+            { id: 16, cat: 'sistemas', titulo: 'RestoPOS', desc: 'Sistema de comandero para comida.', precio: 4499, tipo: 'desde', badge: 'Hot', theme: 'card-red', img: 'RestoPOS.png' },
+            { id: 17, cat: 'sistemas', titulo: 'E-Commerce', desc: 'Tienda online con carrito y métodos de pago integrados.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'E-Commerce.png' },
+            { id: 18, cat: 'sistemas', titulo: 'Landing Page', desc: 'Páginas web profesionales totalmente personalizadas.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'Landing Page.png' },
+            { id: 19, cat: 'sistemas', titulo: 'BarberPRO', desc: 'Gestión de citas, pagos y cortes para barberías.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'BarberPRO.png' },
+            { id: 20, cat: 'sistemas', titulo: 'MotoPartesPRO', desc: 'Especializado en refacciones de motos.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'MotoPartesPRO.png' },
+            { id: 21, cat: 'sistemas', titulo: 'SorteoPRO', desc: 'Venta de boletos y gestión de premios.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'SorteoPRO.png' },
+            { id: 22, cat: 'sistemas', titulo: 'InventarioPRO', desc: 'Control de entradas y salidas para empresas.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'InventarioPRO.png' },
+            { id: 23, cat: 'sistemas', titulo: 'ChecadorPRO', desc: 'Asistencia y nómina digital personalizada.', precio: 4499, tipo: 'desde', badge: 'Útil', theme: '', img: 'ChecadorPRO.png' },
             
             // AUTOMATIZACIÓN
             { id: 24, cat: 'bots', titulo: 'Bot Automatizado 24/7', desc: 'Bot para Facebook que responde por ti los 365 días.\nIncluye 3 automatizaciones personalizadas.', precio: 2999, tipo: 'unico', badge: '24/7', theme: 'card-red', img: 'Bot Automatizado 24 7.png' }
@@ -400,12 +422,23 @@
                 if(prod.tipo === 'desde') textPrice = `<span>Desde</span> $${prod.precio.toLocaleString('es-MX')}`;
                 if(prod.tipo === 'cotizar') textPrice = `<span>A Cotizar</span>`;
 
-                // Uso de encodeURI vital para leer imágenes con acentos y espacios en GitHub
+                // Agregando Selector Beta / Pro para Sistemas (Categoria 'sistemas')
+                let variantHTML = '';
+                if (prod.cat === 'sistemas') {
+                    variantHTML = `
+                        <select id="variant-${prod.id}" class="system-variant">
+                            <option value="beta">BETA ($4,499 MXN)</option>
+                            <option value="pro">PRO ($7,000 - $10,000 MXN)</option>
+                        </select>
+                    `;
+                }
+
+                // Evitamos encodeURI que a veces falla en navegadores locales, usamos directo el string.
                 grid.innerHTML += `
                     <div class="card ${prod.theme}" data-aos="fade-up" data-aos-delay="${delay}">
                         ${badgeHTML}
                         <div class="card-img-wrapper">
-                            <img src="${encodeURI(prod.img)}" alt="${prod.titulo}" loading="lazy" onerror="this.src='https://placehold.co/400x220/111/444?text=Foto+No+Encontrada'">
+                            <img src="${prod.img}" alt="${prod.titulo}" loading="lazy" onerror="this.src='https://placehold.co/400x220/111/444?text=Foto+No+Encontrada'">
                         </div>
                         <div class="card-cat">${obtenerNombreCat(prod.cat)}</div>
                         <h3 class="card-title">${prod.titulo}</h3>
@@ -413,6 +446,7 @@
                         <div class="price-box">
                             <div class="price">${textPrice}</div>
                         </div>
+                        ${variantHTML}
                         <button class="btn-add" onclick="agregarAlCarrito(${prod.id})">+ Agregar al Proyecto</button>
                     </div>
                 `;
@@ -437,10 +471,33 @@
         }
 
         function agregarAlCarrito(id) {
-            const prod = productos.find(p => p.id === id);
+            const prodBase = productos.find(p => p.id === id);
+            
+            // Hacemos una copia para no alterar el array principal
+            let prod = { ...prodBase };
+            
+            // Identificador único para el carrito (permite borrar items duplicados independientemente)
+            prod.cartId = Date.now() + Math.random(); 
+
+            // Si es un sistema, verificamos la opción seleccionada
+            if (prod.cat === 'sistemas') {
+                const selectElement = document.getElementById(`variant-${id}`);
+                const version = selectElement.value;
+                
+                if (version === 'beta') {
+                    prod.titulo = `${prod.titulo} (Versión BETA)`;
+                    prod.precio = 4499;
+                } else if (version === 'pro') {
+                    prod.titulo = `${prod.titulo} (Versión PRO)`;
+                    prod.precio = 7000; // Asignamos precio base Pro de 7000
+                    prod.tipo = 'desde';
+                }
+            }
+
             carrito.push(prod);
             actualizarCarrito();
             
+            // Animación del botón cotizar
             const btn = document.querySelector('.cart-trigger');
             btn.style.background = 'var(--neon-green)';
             btn.style.color = 'var(--bg-black)';
@@ -464,13 +521,16 @@
 
             let html = '';
             let total = 0;
-            let aCotizar = false;
+            let esAproximado = false; // Bandera si hay precios variables/PRO
 
             carrito.forEach((item, index) => {
                 total += item.precio;
-                if(item.tipo === 'cotizar' || item.tipo === 'desde') aCotizar = true;
+                if(item.tipo === 'cotizar' || item.tipo === 'desde') esAproximado = true;
 
                 let precioTexto = item.precio > 0 ? `$${item.precio.toLocaleString()}` : 'A Cotizar';
+                if (item.cat === 'sistemas' && item.titulo.includes('PRO')) {
+                    precioTexto = 'Desde $7,000';
+                }
                 
                 html += `
                     <div class="cart-item">
@@ -485,7 +545,7 @@
 
             body.innerHTML = html;
             let totalText = `$${total.toLocaleString('es-MX')} MXN`;
-            if(aCotizar) totalText += ` + Variables`;
+            if(esAproximado) totalText += ` + Variables`;
             document.getElementById('cart-total-price').innerText = totalText;
         }
 
