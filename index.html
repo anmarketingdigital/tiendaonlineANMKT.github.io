@@ -32,7 +32,7 @@
             color: var(--text-light); 
             font-family: var(--font-body); 
             overflow-x: hidden; 
-            /* Fondo con imagen AENE conectada a tu repositorio (usando %20 por el espacio) */
+            /* Fondo con imagen AENE, capa oscura para legibilidad y destellos neón */
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(0, 255, 102, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 85% 30%, rgba(255, 0, 60, 0.05) 0%, transparent 40%),
@@ -346,7 +346,7 @@
     <script>
         AOS.init({ once: true, offset: 50 });
 
-        // Base de Datos Exacta integrando los nombres de archivo exactos de Github
+        // Base de Datos Exacta integrando los nombres de archivo de Github
         const productos = [
             // ESCALAMIENTO
             { id: 1, cat: 'escalamiento', titulo: 'Paquete Emprendedor', desc: '8 Flyers y 4 Videos Publicitarios.\nGestión FB & IG.\n*No incluye inversión en FB Ads.', precio: 3499, tipo: 'mes', badge: '', theme: '', img: 'Paquete emprendedor.png' },
@@ -401,7 +401,7 @@
                 if(prod.tipo === 'desde') textPrice = `<span>Desde</span> $${prod.precio.toLocaleString('es-MX')}`;
                 if(prod.tipo === 'cotizar') textPrice = `<span>A Cotizar</span>`;
 
-                // Aquí se aplica encodeURI() a prod.img para asegurar que los espacios o paréntesis en los nombres no rompan la imagen
+                // Agregado encodeURI para forzar la lectura correcta en GitHub de imágenes con acentos o espacios
                 grid.innerHTML += `
                     <div class="card ${prod.theme}" data-aos="fade-up" data-aos-delay="${delay}">
                         ${badgeHTML}
