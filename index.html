@@ -3,486 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AN MARKETING DIGITAL | E-Commerce Premium</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>AN MARKETING DIGITAL | Sistemas que Venden Solos</title>
+    
+    <!-- Fuentes Google: Montserrat para impacto, Inter para legibilidad -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Animaciones AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* Paleta Ultra Premium */
+        /* ================= IDENTIDAD DE MARCA ================= */
         :root {
-            --bg-dark: #030303;
+            --bg-black: #050505;
             --bg-card: #0d0d0d;
-            --text-main: #ffffff;
-            --text-muted: #aaaaaa;
-            --neon-green: #39ff14;
-            --neon-red: #ff073a;
-            --glass-bg: rgba(13, 13, 13, 0.85);
+            --neon-green: #00FF66;
+            --neon-red: #FF003C;
+            --text-light: #ffffff;
+            --text-muted: #888888;
+            --font-title: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
-        /* Fondo Global Aplicado al Body */
         body { 
-            background: linear-gradient(to bottom, rgba(3,3,3,0.8) 0%, rgba(3,3,3,0.4) 40%, rgba(3,3,3,0.6) 80%, rgba(0,0,0,0.95) 100%), 
-                        url('https://drive.google.com/thumbnail?id=1yE1UHPArfDvZdaZmddtpufB7P4T6HvTQ&sz=w1920') center/cover fixed;
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            font-family: 'Roboto', sans-serif; 
+            background-color: var(--bg-black); 
+            color: var(--text-light); 
+            font-family: var(--font-body); 
             overflow-x: hidden; 
-            scroll-behavior: smooth; 
+            /* Fondo con imagen AENE, capa oscura para legibilidad y destellos neón */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 102, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(255, 0, 60, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)),
+                url('Fondo aene.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
-        
-        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
-        a { text-decoration: none; color: inherit; }
 
-        /* Banner de Urgencia */
-        .urgency-banner {
-            background: linear-gradient(90deg, #000, var(--neon-red), #000); color: white; text-align: center;
-            padding: 8px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; position: fixed; top: 0; width: 100%; z-index: 1001;
-            animation: pulseBg 3s infinite;
+        /* ================= ANIMACIONES NEÓN ================= */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 transparent; }
         }
-        @keyframes pulseBg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 0, 60, 0); }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+        @keyframes text-glow-green {
+            0%, 100% { text-shadow: 0 0 10px rgba(0,255,102,0.5); }
+            50% { text-shadow: 0 0 20px rgba(0,255,102,0.8), 0 0 30px rgba(0,255,102,0.6); }
+        }
 
-        /* Header & Icono del Carrito */
+        /* ================= HEADER & LOGO ================= */
+        .urgency-bar {
+            background: linear-gradient(90deg, #111, var(--neon-red), #111);
+            color: white; text-align: center; padding: 6px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase; width: 100%; position: fixed; top: 0; z-index: 1001;
+            background-size: 200% auto; animation: shineBar 3s linear infinite;
+        }
+        @keyframes shineBar { to { background-position: 200% center; } }
+
         header {
-            position: fixed; top: 32px; width: 100%; background: var(--glass-bg); backdrop-filter: blur(12px);
-            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid rgba(57, 255, 20, 0.15);
+            position: fixed; top: 28px; width: 100%; padding: 15px 5%;
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
-        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 10px rgba(57, 255, 20, 0.4); }
-        .logo span { color: var(--neon-red); text-shadow: 0 0 10px rgba(255, 7, 58, 0.4); }
         
+        .logo-container {
+            display: flex; align-items: center; gap: 15px; text-decoration: none; color: white;
+        }
+        .logo-img {
+            height: 50px; width: 50px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--neon-red); box-shadow: 0 0 15px rgba(255,0,60,0.5);
+            transition: 0.3s;
+            background-color: #000;
+        }
+        .logo-container:hover .logo-img { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0,255,102,0.6); }
+        .logo-text { font-family: var(--font-title); font-size: 1.2rem; font-weight: 900; line-height: 1; }
+        .logo-text span { color: var(--neon-green); display: block; font-size: 1.5rem; letter-spacing: 1px; }
+
         .cart-trigger {
             background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green);
-            padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
-            transition: 0.4s; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 10px rgba(57, 255, 20, 0.1);
+            padding: 10px 25px; border-radius: 50px; font-family: var(--font-title); font-weight: 700;
+            cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s;
+            animation: pulse-green 2s infinite; text-transform: uppercase;
         }
-        .cart-trigger:hover { background: var(--neon-green); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); }
-        .cart-badge { background: var(--neon-red); color: #fff; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; transition: transform 0.3s ease; display: inline-block; }
+        .cart-trigger:hover { background: var(--neon-green); color: var(--bg-black); }
+        .cart-badge { background: var(--neon-red); color: white; padding: 2px 8px; border-radius: 20px; font-size: 0.85rem; }
 
-        /* Sidebar del Carrito */
-        .cart-sidebar {
-            position: fixed; top: 0; right: -100%; width: 400px; max-width: 100%; height: 100vh;
-            background: #080808; border-left: 2px solid var(--neon-green); z-index: 9999;
-            transition: 0.5s ease-in-out; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.8);
-        }
-        .cart-sidebar.open { right: 0; }
-        .cart-header { padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
-        .cart-header h3 { color: var(--neon-green); font-size: 1.5rem; }
-        .close-cart { background: none; border: none; color: var(--neon-red); font-size: 1.5rem; cursor: pointer; font-weight: bold; }
-        .close-cart:hover { transform: scale(1.2); }
-        
-        .cart-items-container { flex-grow: 1; overflow-y: auto; padding: 25px; }
-        .empty-cart-msg { text-align: center; color: var(--text-muted); margin-top: 50px; font-size: 1.1rem; }
-        
-        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #111; padding: 10px; border-radius: 8px; border: 1px solid rgba(57,255,20,0.2); }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; }
-        .cart-item-info { flex-grow: 1; }
-        .cart-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; color: #fff; }
-        .remove-item { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
-        
-        /* Sección de Pagos en el Carrito */
-        .cart-payment { padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.1); background: #080808; }
-        .cart-payment h4 { color: var(--neon-green); font-size: 0.9rem; margin-bottom: 10px; }
-        .payment-select { width: 100%; padding: 12px; background: #111; color: #fff; border: 1px solid rgba(57,255,20,0.3); border-radius: 5px; margin-bottom: 15px; outline: none; font-family: 'Roboto', sans-serif; cursor: pointer; transition: 0.3s; }
-        .payment-select:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(57,255,20,0.2); }
-        .payment-select option { background: #111; color: #fff; }
-        .payment-info-box { display: none; background: #030303; padding: 15px; border-radius: 5px; border-left: 3px solid var(--neon-red); font-size: 0.85rem; color: #ccc; line-height: 1.5; }
-
-        .cart-footer { padding: 25px; border-top: 1px solid rgba(255,255,255,0.1); background: #030303; }
-        
-        /* Overlay del carrito */
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9998; display: none; backdrop-filter: blur(5px); }
-        .cart-overlay.show { display: block; }
-
-        /* Botones Globales */
-        .btn-buy {
-            display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; background: transparent;
-            border: 2px solid var(--neon-green); color: var(--neon-green); font-weight: 900; font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase; border-radius: 8px; transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; z-index: 1;
-        }
-        .btn-buy::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--neon-green); transition: 0.4s; z-index: -1; }
-        .btn-buy:hover::before { left: 0; }
-        .btn-buy:hover { color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); }
-
-        .btn-whatsapp-cart { background: var(--neon-red); border-color: var(--neon-red); color: #fff; }
-        .btn-whatsapp-cart::before { background: #fff; }
-        .btn-whatsapp-cart:hover { color: var(--neon-red); box-shadow: 0 0 20px var(--neon-red); }
-
-        /* Hero */
+        /* ================= HERO SECTION ================= */
         .hero {
-            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            padding: 0 20px;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 120px 5% 50px; position: relative;
         }
-        .hero-content h1 { font-size: 5rem; font-weight: 900; margin-bottom: 10px; animation: slideUp 1s ease-out; }
-        .hero-content h2 { font-size: 2rem; color: var(--neon-green); margin-bottom: 25px; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
-        .hero-content p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+        .hero h1 { 
+            font-family: var(--font-title); font-size: clamp(2.5rem, 5vw, 4.5rem); 
+            font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; 
+        }
+        .hero h1 span { color: var(--neon-green); animation: text-glow-green 3s infinite; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
+        .hero p strong { color: white; }
 
-        /* Tienda */
-        .section-padding { 
-            padding: 100px 5%; 
-            width: 100%;
+        .btn-main {
+            display: inline-block; padding: 18px 45px; background: var(--neon-red); color: white;
+            font-family: var(--font-title); font-weight: 900; text-transform: uppercase; text-decoration: none;
+            border-radius: 50px; transition: 0.3s; font-size: 1.1rem; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.5); border: 2px solid var(--neon-red);
         }
-        .container-store { max-width: 1400px; margin: 0 auto; }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 3rem; margin-bottom: 10px; }
-        .section-title h2 span { color: var(--neon-red); }
+        .btn-main:hover { background: transparent; color: var(--neon-red); box-shadow: 0 0 30px rgba(255, 0, 60, 0.8); }
+
+        /* ================= CATALOGO & FILTROS (UX) ================= */
+        .store { padding: 80px 5%; max-width: 1400px; margin: 0 auto; }
         
-        .grid-store { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .product-card { background: rgba(13, 13, 13, 0.9); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden; transition: all 0.4s ease; display: flex; flex-direction: column; }
-        .product-card:hover { border-color: var(--neon-red); box-shadow: 0 10px 30px rgba(255, 7, 58, 0.15); transform: translateY(-5px); }
-        .product-img { width: 100%; height: 250px; object-fit: cover; border-bottom: 2px solid var(--neon-red); filter: grayscale(20%); transition: 0.5s; }
-        .product-card:hover .product-img { filter: grayscale(0%); border-color: var(--neon-green); }
-        .product-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        .product-info h3 { font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+        .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 60px; }
+        .filter-btn {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+            padding: 12px 25px; border-radius: 30px; cursor: pointer; transition: 0.3s;
+            font-family: var(--font-title); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--neon-green); color: var(--bg-black); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0,255,102,0.4); }
+
+        /* ================= PRODUCT CARDS ================= */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
         
-        /* Acordeón */
-        .toggle-details { background: none; border: none; color: var(--neon-red); font-weight: bold; cursor: pointer; text-align: left; padding: 0; margin-bottom: 15px; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .toggle-details:hover { color: var(--neon-green); }
-        .detailed-content { max-height: 0; overflow: hidden; transition: 0.5s ease-out; opacity: 0; }
-        .detailed-content.open { max-height: 500px; opacity: 1; margin-bottom: 20px; }
-        .detailed-content ul { padding-left: 20px; color: #ccc; font-size: 0.9rem; margin-top: 10px; }
-        .detailed-content li { margin-bottom: 8px; }
-
-        /* Botón Flotante WhatsApp */
-        .float-ws {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--neon-green); color: #000;
-            width: 65px; height: 65px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 35px; box-shadow: 0 0 20px rgba(57,255,20,0.6);
-            z-index: 990; transition: 0.3s;
-            animation: pulse-ws 2s infinite;
+        .card {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px;
+            padding: 25px; display: flex; flex-direction: column; position: relative; overflow: hidden;
+            transition: 0.4s; z-index: 1;
         }
-        .float-ws:hover { transform: scale(1.1); background: #fff; color: var(--neon-green); }
-        @keyframes pulse-ws {
-            0% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(57, 255, 20, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-green); transform: scaleX(0); transform-origin: left; transition: 0.4s; z-index: -1;
         }
+        .card:hover { transform: translateY(-10px); border-color: rgba(0,255,102,0.3); box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
+        .card:hover::before { transform: scaleX(1); }
+        .card.card-red:hover { border-color: rgba(255,0,60,0.3); }
+        .card.card-red::before { background: var(--neon-red); }
 
-        /* Animaciones */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Notificaciones Toast */
-        .toast-container {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            z-index: 9999; display: flex; flex-direction: column; gap: 10px;
-            pointer-events: none;
+        .card-img-wrapper {
+            width: 100%; height: 220px; border-radius: 10px; overflow: hidden;
+            margin-bottom: 20px; background-color: #111; position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
         }
+        .card-img-wrapper img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+        }
+        .card:hover .card-img-wrapper img { transform: scale(1.08); }
+
+        .badge {
+            position: absolute; top: 15px; right: 15px; padding: 5px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 900; text-transform: uppercase; font-family: var(--font-title);
+            z-index: 2;
+        }
+        .badge.best { background: rgba(0,255,102,0.9); color: var(--bg-black); box-shadow: 0 0 10px rgba(0,255,102,0.4); }
+        .badge.hot { background: rgba(255,0,60,0.9); color: white; box-shadow: 0 0 10px rgba(255,0,60,0.4); animation: pulse-red 2s infinite;}
+
+        .card-cat { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 600;}
+        .card-title { font-size: 1.4rem; font-family: var(--font-title); margin-bottom: 15px; line-height: 1.2; font-weight: 900; }
+        .card-desc { color: #cccccc; font-size: 0.9rem; margin-bottom: 25px; flex-grow: 1; line-height: 1.6; white-space: pre-line; }
+        
+        .price-box { margin-bottom: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .price { font-size: 2rem; font-weight: 900; font-family: var(--font-title); color: var(--neon-green); }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .card-red .price { color: var(--neon-red); }
+        
+        .btn-add {
+            width: 100%; padding: 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            color: white; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: 700; 
+            font-family: var(--font-title); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-add:hover { background: var(--neon-green); color: var(--bg-black); border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0,255,102,0.5); }
+        .card-red .btn-add:hover { background: var(--neon-red); color: white; border-color: var(--neon-red); box-shadow: 0 0 20px rgba(255,0,60,0.5); }
+
+        /* ================= SIDEBAR CARRITO ================= */
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(5px); }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+        
+        .cart-sidebar {
+            position: fixed; top: 0; right: -100%; width: 450px; max-width: 100%; height: 100vh;
+            background: var(--bg-card); border-left: 2px solid var(--neon-green); z-index: 9999;
+            transition: 0.4s cubic-bezier(0.82, 0.085, 0.395, 0.895); display: flex; flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.9);
+        }
+        .cart-sidebar.active { right: 0; }
+        
+        .cart-header { padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-family: var(--font-title); color: white; font-size: 1.5rem; font-weight: 900;}
+        .close-cart { background: none; border: none; color: var(--neon-red); font-size: 1.8rem; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .close-cart:hover { transform: scale(1.2) rotate(90deg); }
+        
+        .cart-body { padding: 25px; overflow-y: auto; flex-grow: 1; }
+        .empty-cart { text-align: center; color: var(--text-muted); margin-top: 40px; font-weight: 600; }
+        
+        .cart-item { background: #111; border: 1px solid rgba(0,255,102,0.2); border-radius: 10px; padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .cart-item-info h4 { font-size: 0.95rem; margin-bottom: 5px; color: white; font-family: var(--font-title); }
+        .cart-item-info p { font-size: 0.9rem; color: var(--neon-green); font-weight: 700; }
+        .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 0.8rem; text-decoration: underline; font-weight: bold; }
+
+        .cart-footer { padding: 25px; background: #050505; border-top: 1px solid rgba(255,255,255,0.1); }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 900; font-family: var(--font-title); margin-bottom: 20px; color: white; }
+        
+        .btn-whatsapp {
+            display: block; width: 100%; text-align: center; padding: 18px; background: var(--neon-green);
+            color: #000; text-decoration: none; border-radius: 8px; font-weight: 900; font-family: var(--font-title);
+            transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-whatsapp:hover { background: white; color: var(--bg-black); box-shadow: 0 0 20px rgba(0, 255, 102, 0.6); }
+
+        /* ================= SOCIAL PROOF (Neuromarketing) ================= */
+        .toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 9990; display: flex; flex-direction: column; gap: 10px; pointer-events: none;}
         .toast {
-            background: rgba(13, 13, 13, 0.95); border: 1px solid var(--neon-green);
-            color: #fff; padding: 12px 25px; border-radius: 5px;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); font-size: 0.9rem;
-            display: flex; align-items: center; gap: 10px;
-            animation: slideUpToast 0.3s ease-out, fadeOutToast 0.5s ease-out 2.5s forwards;
+            background: rgba(13,13,13,0.9); backdrop-filter: blur(10px); border-left: 4px solid var(--neon-red);
+            padding: 15px 20px; border-radius: 8px; color: white; font-size: 0.85rem; font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8); transform: translateX(-120%); transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        .toast.error { border-color: var(--neon-red); box-shadow: 0 0 15px rgba(255, 7, 58, 0.3); }
-        @keyframes slideUpToast { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeOutToast { from { opacity: 1; } to { opacity: 0; } }
+        .toast.show { transform: translateX(0); }
+        .toast span { color: var(--neon-green); font-size: 0.75rem; display: block; margin-top: 5px; font-weight: 400;}
+
+        /* ================= BOTÓN WHATSAPP FLOTANTE ================= */
+        .float-whatsapp {
+            position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px;
+            background-color: #25d366; color: #FFF; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 9995;
+            transition: 0.3s; animation: pulse-green 2s infinite;
+        }
+        .float-whatsapp:hover { transform: scale(1.1); background-color: #1ebe57; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7); }
+        .float-whatsapp svg { width: 35px; height: 35px; fill: white; }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-            header { padding: 15px; flex-direction: column; gap: 15px; }
-            .cart-sidebar { width: 100%; }
-            .float-ws { bottom: 20px; right: 20px; width: 55px; height: 55px; }
+            header { padding: 10px 5%; }
+            .logo-text { font-size: 1rem; }
+            .logo-text span { font-size: 1.2rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
+            .filters::-webkit-scrollbar { display: none; }
+            .cart-sidebar { width: 100%; border-left: none; }
+            .float-whatsapp { width: 50px; height: 50px; bottom: 15px; right: 15px; }
+            .float-whatsapp svg { width: 28px; height: 28px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="urgency-banner">🔥 ARMA TU PAQUETE DE SERVICIOS VIP HOY 🔥</div>
+    <div class="urgency-bar">🔥 AGENDA TU PROYECTO HOY - CUPOS LIMITADOS ESTE MES 🔥</div>
 
-    <header>
-        <a href="#" class="logo">AN <span>MARKETING</span></a>
-        <button class="cart-trigger" onclick="abrirCarrito()">
-            TU PAQUETE <span class="cart-badge" id="cart-counter">0</span>
+    <header id="header">
+        <a href="#" class="logo-container">
+            <!-- AQUÍ ESTÁ EL NUEVO LOGOTIPO DIRECTO DESDE EL REPOSITORIO -->
+            <img src="Logotipo AENE.jpg" alt="Logo AN Marketing Digital" class="logo-img" onerror="this.src='https://placehold.co/50x50/00FF66/000?text=AN'">
+            <div class="logo-text">
+                AN <span>MARKETING</span>
+            </div>
+        </a>
+        <button class="cart-trigger" onclick="toggleCart()">
+            Cotizar <span class="cart-badge" id="cart-count">0</span>
         </button>
     </header>
 
-    <div class="cart-overlay" id="cart-overlay" onclick="cerrarCarrito()"></div>
+    <section class="hero">
+        <div data-aos="zoom-in" data-aos-duration="1000">
+            <h1>Sistemas Digitales<br>que <span>Venden Solos</span></h1>
+            <p>Estrategia + Contenido + Publicidad + Tecnología.<br><strong>Creamos ecosistemas digitales para que las marcas sean vistas, recordadas y elegidas.</strong></p>
+            <a href="#catalogo" class="btn-main">Ver Catálogo de Servicios</a>
+        </div>
+    </section>
+
+    <section class="store" id="catalogo">
+        <div class="filters" data-aos="fade-up">
+            <button class="filter-btn active" onclick="filtrar('todos')">Todo</button>
+            <button class="filter-btn" onclick="filtrar('escalamiento')">Escalamiento</button>
+            <button class="filter-btn" onclick="filtrar('marca')">Branding & Diseño</button>
+            <button class="filter-btn" onclick="filtrar('produccion')">Producción & Ads</button>
+            <button class="filter-btn" onclick="filtrar('sistemas')">Sistemas Pro</button>
+            <button class="filter-btn" onclick="filtrar('bots')">Automatización</button>
+        </div>
+
+        <div class="grid" id="products-grid">
+            <!-- Productos inyectados por JS -->
+        </div>
+    </section>
+
+    <footer style="padding: 50px 5%; text-align: center; border-top: 1px solid rgba(0,255,102,0.2); margin-top: 50px; background: #000;">
+        <!-- AQUÍ ESTÁ EL NUEVO LOGOTIPO DIRECTO DESDE EL REPOSITORIO EN EL FOOTER -->
+        <img src="Logotipo AENE.jpg" alt="AN Marketing Digital" onerror="this.src='https://placehold.co/60x60/00FF66/000?text=AN'" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--neon-green);">
+        <h3 style="font-family: var(--font-title); color: white; margin-bottom: 10px; text-transform: uppercase;">AN MARKETING DIGITAL</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Estrategia + Contenido + Publicidad + Tecnología</p>
+    </footer>
+
+    <!-- Overlay y Sidebar del Carrito -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
-            <h3>PAQUETE VIP</h3>
-            <button class="close-cart" onclick="cerrarCarrito()">X</button>
+            <h3>TU PROYECTO</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
         </div>
-        
-        <div class="cart-items-container" id="cart-items-container">
-            <div class="empty-cart-msg">Aún no has seleccionado ningún servicio.</div>
+        <div class="cart-body" id="cart-body">
+            <div class="empty-cart">Aún no agregas servicios a tu cotización.</div>
         </div>
-
-        <!-- Nueva sección de método de pago -->
-        <div class="cart-payment" id="cart-payment-section" style="display: none;">
-            <h4>MÉTODO DE PAGO</h4>
-            <select class="payment-select" id="payment-method" onchange="actualizarInfoPago()">
-                <option value="none">Selecciona un método de pago...</option>
-                <option value="transferencia">Transferencia Bancaria (SPEI)</option>
-                <option value="oxxo">Depósito en OXXO</option>
-                <option value="efectivo">Efectivo (En cita / Asesoría)</option>
-            </select>
-            <div class="payment-info-box" id="payment-info">
-                <!-- La info se inyecta desde JS -->
-            </div>
-        </div>
-
         <div class="cart-footer">
-            <button onclick="generarPedidoWhatsApp()" class="btn-buy btn-whatsapp-cart">COTIZAR PROYECTO AHORA ⚡</button>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 10px;">El pedido se enviará a nuestro WhatsApp corporativo.</p>
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span id="cart-total-price" style="color: var(--neon-green);">$0 MXN</span>
+            </div>
+            
+            <!-- INFO BANCARIA EN EL CARRITO -->
+            <div style="background: rgba(0,0,0,0.5); border: 1px dashed rgba(0, 255, 102, 0.3); border-radius: 8px; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; color: #ccc;">
+                <p style="color: var(--neon-green); font-weight: bold; margin-bottom: 10px; font-family: var(--font-title); font-size: 0.95rem; text-align: center;">💳 MÉTODOS DE PAGO (NU)</p>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; flex-wrap: wrap; gap: 5px;">
+                    <strong>Transferencia (CLABE):</strong> 
+                    <span style="color: white; user-select: all;">638180010116072301</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px;">
+                    <strong>Depósito en Efectivo:</strong> 
+                    <span style="color: white; user-select: all;">5195374754270635</span>
+                </div>
+            </div>
+
+            <a href="#" class="btn-whatsapp" id="btn-whatsapp" onclick="enviarWhatsApp(event)">
+                ENVIAR A WHATSAPP 🚀
+            </a>
         </div>
     </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>AN MARKETING DIGITAL</h1>
-            <h2>TU MEJOR OPCIÓN EN LEÓN, GTO.</h2>
-            <p>Selecciona los servicios que tu negocio necesita, agrégalos a tu paquete VIP y obtén una cotización inmediata y personalizada.</p>
-            <a href="#tienda" class="btn-buy" style="max-width: 300px; margin: 0 auto; background: var(--neon-red); border-color: var(--neon-red); color: white;">EXPLORAR SERVICIOS</a>
-        </div>
-    </section>
+    <!-- Contenedor Social Proof -->
+    <div class="toast-container" id="toast-container"></div>
 
-    <section id="tienda" class="section-padding reveal">
-        <div class="container-store">
-            <div class="section-title">
-                <h2>NUESTRO <span>CATÁLOGO</span></h2>
-                <p>AÑADE SERVICIOS A TU CARRITO PARA CREAR TU PROYECTO</p>
-            </div>
-            
-            <div class="grid-store" id="productos-container">
-            </div>
-        </div>
-    </section>
-
-    <footer style="padding: 50px 5%; text-align: center; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); border-top: 2px solid var(--neon-green);">
-        <h2 style="color: var(--text-main); margin-bottom: 10px; font-weight: 900;">AN MARKETING DIGITAL</h2>
-        <p style="color: var(--text-muted); margin-bottom: 30px;">León, Guanajuato, México.</p>
-        <div style="margin-bottom: 20px;">
-            <a href="https://www.facebook.com/profile.php?id=100091502874923" target="_blank" style="margin: 0 10px; color: #fff;">Facebook</a>
-            <a href="https://www.instagram.com/anmarketing.digital" target="_blank" style="margin: 0 10px; color: #fff;">Instagram</a>
-            <a href="https://www.tiktok.com/@an_marketing_digital?is_from_webapp=1&sender_device=pc" target="_blank" style="margin: 0 10px; color: #fff;">TikTok</a>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/524778579202?text=Hola%20AN%20MARKETING%20DIGITAL,%20me%20gustar%C3%ADa%20recibir%20atenci%C3%B3n%20personalizada%20y%20m%C3%A1s%20informaci%C3%B3n." target="_blank" class="float-ws" title="Contáctanos">
-        <svg width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.362 2.76 1.053 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/524778579202" class="float-whatsapp" target="_blank" rel="noopener noreferrer" title="¡Chatea con nosotros!">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.163 0 0 7.163 0 16c0 2.815.733 5.51 2.128 7.915L.302 31.42l7.747-2.029A15.908 15.908 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.35c-2.39 0-4.733-.62-6.79-1.8l-.485-.29-5.04 1.32 1.34-4.915-.316-.505A13.256 13.256 0 012.65 16C2.65 8.647 8.647 2.65 16 2.65S29.35 8.647 29.35 16 23.353 29.35 16 29.35zm7.323-9.98c-.402-.202-2.38-1.176-2.75-1.312-.37-.135-.638-.202-.906.202-.268.404-1.038 1.313-1.272 1.583-.235.27-.47.303-.872.102-3.13-1.57-5.03-3.664-6.336-5.898-.236-.404.237-.37.99-1.874.135-.27.068-.505-.034-.707-.101-.202-.906-2.188-1.242-2.996-.327-.785-.66-.677-.906-.69-.235-.012-.504-.015-.772-.015-.268 0-.705.101-1.074.505-.37.404-1.41 1.38-1.41 3.366 0 1.986 1.444 3.904 1.646 4.174.202.27 2.85 4.348 6.906 6.1 2.8 1.21 3.655 1.107 4.325 1.04.763-.077 2.38-1.047 2.682-1.928.303-.88.303-1.636.202-1.796-.1-.16-.37-.258-.772-.46z"></path>
         </svg>
     </a>
 
-    <div class="toast-container" id="toast-container"></div>
-
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const servicios = [
-            { 
-                id: 1, 
-                titulo: "Manejo de Redes Sociales", 
-                desc: "Gestión experta para escalar tu comunidad.", 
-                detalles: ["Aumento de visibilidad.", "Diseño de parrilla de contenidos mensual."], 
-                img: "https://drive.google.com/thumbnail?id=1IppnROJPUJ1rfgP6jzoGWJFI53p3Z6iE&sz=w800" 
-            },
-            { 
-                id: 2, 
-                titulo: "Creación de Contenido", 
-                desc: "Fotografía y video que atrapa la atención.", 
-                detalles: ["Sesiones premium.", "Edición para Reels/TikToks."], 
-                img: "https://drive.google.com/thumbnail?id=1Qr5ghn6J1IaNv_koXAy0Aw6xI1HVUWAL&sz=w800" 
-            },
-            { 
-                id: 3, 
-                titulo: "Campañas Publicitarias", 
-                desc: "Lanzamientos SEM precisos y rentables.", 
-                detalles: ["Segmentación dirigida.", "Reportes de ROI."], 
-                img: "https://drive.google.com/thumbnail?id=1uDiylVPmzZx89lKg4G08MBS8qqP2Fd2g&sz=w800" 
-            },
-            { 
-                id: 4, 
-                titulo: "Desarrollo Web & E-commerce", 
-                desc: "Tu negocio listo para vender online.", 
-                detalles: ["Pasarelas de pago.", "Diseño para conversión."], 
-                img: "https://drive.google.com/thumbnail?id=1dajAaYL-hXlgYKbD0iGEQL6DZ0McnaCz&sz=w800" 
-            },
-            { 
-                id: 5, 
-                titulo: "Diseño de Logotipos & Flyers", 
-                desc: "Identidad visual premium.", 
-                detalles: ["Manual de Identidad.", "Material gráfico para redes."], 
-                img: "https://drive.google.com/thumbnail?id=10vAw6j05fJ9nfjxyqb54JW9nvNtEuU6r&sz=w800" 
-            },
-            { 
-                id: 6, 
-                titulo: "Automatizaciones & Bots", 
-                desc: "Flujos de respuesta para no perder clientes.", 
-                detalles: ["Atención 24/7.", "Calificación de leads."], 
-                img: "https://drive.google.com/thumbnail?id=1Mq8sZz5Qmmn3mvlfMCMuOnHXJjqDwYHc&sz=w800" 
-            }
+        AOS.init({ once: true, offset: 50 });
+
+        // Base de Datos Exacta integrando los nombres de archivo de Github
+        const productos = [
+            // ESCALAMIENTO
+            { id: 1, cat: 'escalamiento', titulo: 'Paquete Emprendedor', desc: '8 Flyers y 4 Videos Publicitarios.\nGestión FB & IG.\n*No incluye inversión en FB Ads.', precio: 3499, tipo: 'mes', badge: '', theme: '', img: 'Paquete emprendedor.png' },
+            { id: 2, cat: 'escalamiento', titulo: 'Paquete Negocio Digital', desc: '6 Flyers y 6 Videos Publicitarios.\nGestión FB & IG.\nINCLUYE: $1,000 MXN inv. en FB Ads.', precio: 4999, tipo: 'mes', badge: 'Más Vendido', theme: 'card-red', img: 'Paquete negocio digital.png' },
+            { id: 3, cat: 'escalamiento', titulo: 'Paquete Premium', desc: '4 Flyers y 8 Videos Publicitarios.\nGestión FB & IG.\nINCLUYE: $1,500 MXN inv. en FB Ads.', precio: 6999, tipo: 'mes', badge: 'VIP', theme: '', img: 'Paquete Premium.png' },
+            { id: 4, cat: 'escalamiento', titulo: 'Tu Nuevo Negocio en Redes', desc: 'Creación Meta (FB/IG) Pro, Logo 100% personalizado, Portada, Vinculación simultánea y WhatsApp Business. Dominio total.', precio: 3499, tipo: 'unico', badge: 'Startup', theme: '', img: 'Tu Nuevo Negocio en Redes.png' },
+            
+            // BRANDING Y MARCA
+            { id: 5, cat: 'marca', titulo: 'Creación de Marca Zero', desc: 'Logotipo personalizado, Identidad Visual, Naming, 2 Flyers y 1 Video Ads para redes.', precio: 1499, tipo: 'unico', badge: 'Oferta', theme: 'card-red', img: 'Creación de Marca Zero.png' },
+            { id: 6, cat: 'marca', titulo: 'Logotipo Personalizado', desc: 'Diseño 100% Personalizado.', precio: 599, tipo: 'unico', badge: '', theme: '', img: 'Logotipo Personalizado.png' },
+            { id: 7, cat: 'marca', titulo: 'Flyer Promocional', desc: 'Imagen 100% Personalizada.', precio: 499, tipo: 'unico', badge: '', theme: '', img: 'Flyer Promocional.png' },
+            { id: 8, cat: 'marca', titulo: 'Video Promocional', desc: 'Animación/Video 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Vídeo Promocional.png' },
+            { id: 9, cat: 'marca', titulo: 'Invitación Digital (Imagen)', desc: 'Diseño 100% Personalizado en imagen.', precio: 499, tipo: 'unico', badge: '', theme: '', img: 'Invitación Digital (Imagen).png' },
+            { id: 10, cat: 'marca', titulo: 'Invitación Digital (Video)', desc: 'Diseño 100% Personalizado en video.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Invitación Digital (Vídeo).png' },
+            { id: 11, cat: 'marca', titulo: 'Catálogos Digitales', desc: '100% Personalizados.\n*Cotización basada en cantidad de productos.', precio: 0, tipo: 'cotizar', badge: '', theme: '', img: 'Catálogos Digitales.png' },
+            
+            // PUBLICIDAD Y PRODUCCIÓN
+            { id: 12, cat: 'produccion', titulo: 'Campañas FB/IG Ads', desc: 'Segmentación, generación de leads y optimización de ventas.\n*No incluye inversión (según presupuesto).', precio: 499, tipo: 'unico', badge: 'Ads', theme: '', img: 'Campañas FBIG Ads.png' },
+            { id: 13, cat: 'produccion', titulo: '1 Video Publicitario / UGC', desc: 'Contenido 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: '1 Video Publicitario UGC.png' },
+            { id: 14, cat: 'produccion', titulo: '2 Videos Publicitarios / UGC', desc: 'Contenido 100% Personalizado en paquete.', precio: 999, tipo: 'unico', badge: 'Ahorro', theme: 'card-red', img: '2 Vídeos Publicitarios UGC.png' },
+            { id: 15, cat: 'produccion', titulo: 'Fotografía de Productos', desc: 'Sesión para 10 productos.\nEdición pro y contenido apoyado con IA.', precio: 1499, tipo: 'unico', badge: 'IA+', theme: '', img: 'Fotografía de Productos.png' },
+
+            // SISTEMAS PRO / WEB
+            { id: 16, cat: 'sistemas', titulo: 'RestoPOS', desc: 'Sistema de comandero para comida. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: 'Hot', theme: 'card-red', img: 'RestoPOS.png' },
+            { id: 17, cat: 'sistemas', titulo: 'E-Commerce', desc: 'Tienda online con carrito y métodos de pago integrados (Única Versión).', precio: 7000, tipo: 'desde', badge: '', theme: '', img: 'E-Commerce.png' },
+            { id: 18, cat: 'sistemas', titulo: 'Landing Page / TuTiendaOnline', desc: 'Páginas web profesionales totalmente personalizadas. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'Página de aterrizaje TuTiendaOnline.png' },
+            { id: 19, cat: 'sistemas', titulo: 'BarberPRO', desc: 'Gestión de citas, pagos y cortes para barberías. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'BarberPRO.png' },
+            { id: 20, cat: 'sistemas', titulo: 'MotoPartesPRO', desc: 'Especializado en refacciones de motos. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'MotoPartesPRO.png' },
+            { id: 21, cat: 'sistemas', titulo: 'SorteoPRO', desc: 'Venta de boletos y gestión de premios. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'SorteoPRO.png' },
+            { id: 22, cat: 'sistemas', titulo: 'InventarioPRO', desc: 'Control de entradas y salidas para empresas. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'InventarioPRO.png' },
+            { id: 23, cat: 'sistemas', titulo: 'ChecadorPRO', desc: 'Asistencia y nómina digital personalizada. (BETA: $4,499 | PRO: $7k-$10k)', precio: 4499, tipo: 'desde', badge: 'Útil', theme: '', img: 'ChecadorPRO.png' },
+            
+            // AUTOMATIZACIÓN
+            { id: 24, cat: 'bots', titulo: 'Bot Automatizado 24/7', desc: 'Bot para Facebook que responde por ti los 365 días.\nIncluye 3 automatizaciones personalizadas.', precio: 2999, tipo: 'unico', badge: '24/7', theme: 'card-red', img: 'Bot Automatizado 24 7.png' }
         ];
 
         let carrito = [];
-        const numWhatsApp = "524778579202";
+        const telfWhatsApp = "524778579202";
 
-        // Renderizar Productos en Pantalla
-        const container = document.getElementById('productos-container');
-        servicios.forEach((serv, index) => {
-            let listaDetalles = serv.detalles.map(item => `<li>${item}</li>`).join('');
-            const html = `
-                <div class="product-card">
-                    <img src="${serv.img}" alt="${serv.titulo}" class="product-img">
-                    <div class="product-info">
-                        <h3>${serv.titulo}</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 15px;">${serv.desc}</p>
-                        
-                        <button class="toggle-details" onclick="toggleDetails(${index})">
-                            Ver detalles
-                            <svg width="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
-                        </button>
-                        <div class="detailed-content" id="detail-${index}"><ul>${listaDetalles}</ul></div>
-
-                        <button onclick="agregarAlCarrito(${serv.id})" class="btn-buy">
-                            + AÑADIR A MI PAQUETE
-                        </button>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += html;
-        });
-
-        // FUNCIONES DEL CARRITO
-        function abrirCarrito() {
-            document.getElementById('cart-sidebar').classList.add('open');
-            document.getElementById('cart-overlay').classList.add('show');
-        }
-
-        function cerrarCarrito() {
-            document.getElementById('cart-sidebar').classList.remove('open');
-            document.getElementById('cart-overlay').classList.remove('show');
-        }
-
-        function agregarAlCarrito(id) {
-            const servicio = servicios.find(s => s.id === id);
-            if (carrito.some(item => item.id === id)) {
-                mostrarNotificacion(`"${servicio.titulo}" ya está en tu paquete.`, true);
-                return;
-            }
-            carrito.push(servicio);
-            actualizarUI();
-            mostrarNotificacion(`"${servicio.titulo}" agregado al paquete.`);
+        function renderProductos(filtro = 'todos') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
             
-            // Animación del contador en el header
-            const counter = document.getElementById('cart-counter');
-            counter.style.transform = 'scale(1.5)';
-            setTimeout(() => counter.style.transform = 'scale(1)', 250);
-        }
+            const filtrados = filtro === 'todos' ? productos : productos.filter(p => p.cat === filtro);
+            
+            filtrados.forEach((prod, index) => {
+                let delay = (index % 4) * 100;
+                let badgeHTML = prod.badge ? `<div class="badge ${prod.theme === 'card-red' ? 'hot' : 'best'}">${prod.badge}</div>` : '';
+                
+                let textPrice = `$${prod.precio.toLocaleString('es-MX')} <span>MXN</span>`;
+                if(prod.tipo === 'mes') textPrice += '<span>/mes</span>';
+                if(prod.tipo === 'desde') textPrice = `<span>Desde</span> $${prod.precio.toLocaleString('es-MX')}`;
+                if(prod.tipo === 'cotizar') textPrice = `<span>A Cotizar</span>`;
 
-        function mostrarNotificacion(mensaje, esError = false) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${esError ? 'error' : ''}`;
-            toast.innerHTML = `${esError ? '⚠️' : '✅'} ${mensaje}`;
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-
-        function eliminarDelCarrito(id) {
-            carrito = carrito.filter(item => item.id !== id);
-            actualizarUI();
-        }
-
-        function actualizarUI() {
-            document.getElementById('cart-counter').innerText = carrito.length;
-            const contenedorCarrito = document.getElementById('cart-items-container');
-            const cartPaymentSection = document.getElementById('cart-payment-section');
-
-            if (carrito.length === 0) {
-                contenedorCarrito.innerHTML = '<div class="empty-cart-msg">Aún no has seleccionado ningún servicio.</div>';
-                cartPaymentSection.style.display = 'none'; // Ocultar pagos si está vacío
-                return;
-            }
-
-            // Mostrar sección de pagos si hay ítems
-            cartPaymentSection.style.display = 'block';
-
-            let htmlCarrito = '';
-            carrito.forEach(item => {
-                htmlCarrito += `
-                    <div class="cart-item">
-                        <img src="${item.img}" alt="${item.titulo}">
-                        <div class="cart-item-info">
-                            <h4>${item.titulo}</h4>
-                            <button class="remove-item" onclick="eliminarDelCarrito(${item.id})">Quitar</button>
+                // Aquí se renderiza la tarjeta ahora incluyendo el componente de imagen (card-img-wrapper)
+                grid.innerHTML += `
+                    <div class="card ${prod.theme}" data-aos="fade-up" data-aos-delay="${delay}">
+                        ${badgeHTML}
+                        <div class="card-img-wrapper">
+                            <img src="${prod.img}" alt="${prod.titulo}" loading="lazy" onerror="this.src='https://placehold.co/400x220/111/444?text=Foto+No+Encontrada'">
                         </div>
+                        <div class="card-cat">${obtenerNombreCat(prod.cat)}</div>
+                        <h3 class="card-title">${prod.titulo}</h3>
+                        <p class="card-desc">${prod.desc}</p>
+                        <div class="price-box">
+                            <div class="price">${textPrice}</div>
+                        </div>
+                        <button class="btn-add" onclick="agregarAlCarrito(${prod.id})">+ Agregar al Proyecto</button>
                     </div>
                 `;
             });
-            contenedorCarrito.innerHTML = htmlCarrito;
         }
 
-        // MOSTRAR INFO DE PAGOS
-        function actualizarInfoPago() {
-            const method = document.getElementById('payment-method').value;
-            const infoDiv = document.getElementById('payment-info');
+        function obtenerNombreCat(cat) {
+            const nombres = { 'escalamiento': 'Redes & Crecimiento', 'marca': 'Branding & Identidad', 'produccion': 'Media & Ads', 'sistemas': 'Desarrollo Web', 'bots': 'Automatización' };
+            return nombres[cat] || cat;
+        }
+
+        function filtrar(categoria) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProductos(categoria);
+        }
+
+        // Lógica del Carrito
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+            document.getElementById('cart-overlay').classList.toggle('active');
+        }
+
+        function agregarAlCarrito(id) {
+            const prod = productos.find(p => p.id === id);
+            carrito.push(prod);
+            actualizarCarrito();
             
-            if (method === 'transferencia') {
-                infoDiv.style.display = 'block';
-                // REEMPLAZAR CON TUS DATOS REALES
-                infoDiv.innerHTML = "<strong>Banco:</strong> BBVA<br><strong>Cuenta:</strong> 0123 4567 89<br><strong>CLABE:</strong> 0123 4567 8901 2345 67<br><strong>Titular:</strong> AN Marketing Digital";
-            } else if (method === 'oxxo') {
-                infoDiv.style.display = 'block';
-                // REEMPLAZAR CON TU TARJETA PARA DEPÓSITOS
-                infoDiv.innerHTML = "<strong>Número de Tarjeta OXXO:</strong><br>4152 31XX XXXX XXXX<br><small style='color: var(--neon-green);'>Dicta este número al cajero para realizar tu depósito.</small>";
-            } else if (method === 'efectivo') {
-                infoDiv.style.display = 'block';
-                infoDiv.innerHTML = "El pago se realizará en efectivo durante la asesoría presencial con nuestro equipo.";
-            } else {
-                infoDiv.style.display = 'none';
-            }
+            const btn = document.querySelector('.cart-trigger');
+            btn.style.background = 'var(--neon-green)';
+            btn.style.color = 'var(--bg-black)';
+            setTimeout(() => { btn.style.background = ''; btn.style.color = ''; }, 300);
         }
 
-        // GENERAR PEDIDO A WHATSAPP
-        function generarPedidoWhatsApp() {
+        function quitarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            document.getElementById('cart-count').innerText = carrito.length;
+            const body = document.getElementById('cart-body');
+            
             if (carrito.length === 0) {
-                alert("Por favor, selecciona al menos un servicio para cotizar.");
+                body.innerHTML = '<div class="empty-cart">Aún no agregas servicios a tu cotización.</div>';
+                document.getElementById('cart-total-price').innerText = '$0 MXN';
                 return;
             }
 
-            const paymentSelect = document.getElementById('payment-method');
-            const paymentValue = paymentSelect.value;
-            const paymentText = paymentSelect.options[paymentSelect.selectedIndex].text;
+            let html = '';
+            let total = 0;
+            let aCotizar = false;
 
-            if (paymentValue === 'none') {
-                alert("Por favor, selecciona un método de pago antes de continuar.");
-                return;
-            }
+            carrito.forEach((item, index) => {
+                total += item.precio;
+                if(item.tipo === 'cotizar' || item.tipo === 'desde') aCotizar = true;
 
-            let mensaje = "🔥 *NUEVA SOLICITUD DE PROYECTO VIP* 🔥\n\nHola AN MARKETING DIGITAL. Me interesa cotizar el siguiente paquete de servicios:\n\n";
-            
-            carrito.forEach(item => {
-                mensaje += `✅ ${item.titulo}\n`;
+                let precioTexto = item.precio > 0 ? `$${item.precio.toLocaleString()}` : 'A Cotizar';
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.titulo}</h4>
+                            <p>${precioTexto}</p>
+                        </div>
+                        <button class="btn-remove" onclick="quitarDelCarrito(${index})">Quitar</button>
+                    </div>
+                `;
             });
 
-            mensaje += `\n💳 *Método de pago seleccionado:* ${paymentText}\n`;
-            
-            if (paymentValue === 'transferencia' || paymentValue === 'oxxo') {
-                mensaje += "🧾 *En breve adjuntaré el comprobante de pago en este chat.*\n";
+            body.innerHTML = html;
+            let totalText = `$${total.toLocaleString('es-MX')} MXN`;
+            if(aCotizar) totalText += ` + Variables`;
+            document.getElementById('cart-total-price').innerText = totalText;
+        }
+
+        // WhatsApp
+        function enviarWhatsApp(e) {
+            e.preventDefault();
+            if(carrito.length === 0) {
+                alert("Selecciona servicios antes de cotizar.");
+                return;
             }
-
-            mensaje += "\n¿Podemos agendar una asesoría para ver los detalles?";
-
-            const url = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
+            let mensaje = "🚀 *NUEVO PROYECTO PARA AN MARKETING* 🚀%0A%0AHola, me interesa cotizar el siguiente paquete para mi marca:%0A%0A";
+            carrito.forEach(item => { mensaje += `✅ ${item.titulo}%0A`; });
+            mensaje += `%0A¿Podemos agendar para ver los detalles y métodos de pago?`;
+            window.open(`https://wa.me/${telfWhatsApp}?text=${mensaje}`, '_blank');
         }
 
-        // Utilidades Visuales (Acordeón y Scroll)
-        function toggleDetails(index) {
-            const content = document.getElementById(`detail-${index}`);
-            content.classList.toggle('open');
+        // Neuromarketing: Social Proof Popups
+        const toastMessages = [
+            "Un negocio en <b>León</b> acaba de agendar el <b>Paquete Negocio Digital</b>.",
+            "Alguien está cotizando un <b>RestoPOS</b> para su restaurante.",
+            "Una marca acaba de solicitar <b>Creación de Marca Zero</b>.",
+            "Un usuario en tu zona acaba de comprar el <b>Bot Automatizado 24/7</b>."
+        ];
+
+        function showToast() {
+            const container = document.getElementById('toast-container');
+            const msg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `🛒 ${msg} <span>Verificado hace unos instantes</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.add('show'); }, 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 500);
+            }, 5000);
         }
 
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        reveals.forEach(reveal => observer.observe(reveal));
+        // Init
+        renderProductos();
+        setTimeout(showToast, 6000);
+        setInterval(showToast, 25000);
 
     </script>
 </body>
