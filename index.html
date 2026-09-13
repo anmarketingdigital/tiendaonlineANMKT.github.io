@@ -137,6 +137,13 @@
             padding: 25px; display: flex; flex-direction: column; position: relative; overflow: hidden;
             transition: 0.4s; z-index: 1;
         }
+        /* CLASE PARA AGREGAR FONDO A LOS PRODUCTOS DE SISTEMAS */
+        .card.bg-sistemas {
+            background-image: linear-gradient(rgba(13, 13, 13, 0.85), rgba(13, 13, 13, 0.95)), url("Fondo aene.png");
+            background-size: cover;
+            background-position: center;
+        }
+
         .card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
             background: var(--neon-green); transform: scaleX(0); transform-origin: left; transition: 0.4s; z-index: -1;
@@ -367,7 +374,6 @@
     <script>
         AOS.init({ once: true, offset: 50 });
 
-        // Imágenes con nombres exactos solucionadas (mayúsculas y acentos respetados)
         const productos = [
             // ESCALAMIENTO
             { id: 1, cat: 'escalamiento', titulo: 'Paquete Emprendedor', desc: '8 Flyers y 4 Videos Publicitarios.\nGestión FB & IG.\n*No incluye inversión en FB Ads.', precio: 3499, tipo: 'mes', badge: '', theme: '', img: 'Paquete emprendedor.png' },
@@ -379,26 +385,26 @@
             { id: 5, cat: 'marca', titulo: 'Creación de Marca Zero', desc: 'Logotipo personalizado, Identidad Visual, Naming, 2 Flyers y 1 Video Ads para redes.', precio: 1499, tipo: 'unico', badge: 'Oferta', theme: 'card-red', img: 'Creación de Marca Zero.png' },
             { id: 6, cat: 'marca', titulo: 'Logotipo Personalizado', desc: 'Diseño 100% Personalizado.', precio: 599, tipo: 'unico', badge: '', theme: '', img: 'Logotipo Personalizado.png' },
             { id: 7, cat: 'marca', titulo: 'Flyer Promocional', desc: 'Imagen 100% Personalizada.', precio: 499, tipo: 'unico', badge: '', theme: '', img: 'Flyer Promocional.png' },
-            { id: 8, cat: 'marca', titulo: 'Video Publicitario', desc: 'Animación/Video 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Video Publicitario.png' },
+            { id: 8, cat: 'marca', titulo: 'Video Publicitario', desc: 'Animación/Video 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Vídeo Publicitario.png' },
             { id: 9, cat: 'marca', titulo: 'Invitación Digital (Imagen)', desc: 'Diseño 100% Personalizado en imagen.', precio: 499, tipo: 'unico', badge: '', theme: '', img: 'Invitación Digital (Imagen).png' },
             { id: 10, cat: 'marca', titulo: 'Invitación Digital en Video', desc: 'Diseño 100% Personalizado en video.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Invitación Digital en Video.png' },
             { id: 11, cat: 'marca', titulo: 'Catálogos Digitales', desc: '100% Personalizados.\n*Cotización basada en cantidad de productos.', precio: 0, tipo: 'cotizar', badge: '', theme: '', img: 'Catálogos Digitales.png' },
             
             // PUBLICIDAD Y PRODUCCIÓN (Imágenes corregidas)
             { id: 12, cat: 'produccion', titulo: 'Campañas FB/IG Ads', desc: 'Segmentación, generación de leads y optimización de ventas.\n*No incluye inversión (según presupuesto).', precio: 499, tipo: 'unico', badge: 'Ads', theme: '', img: 'Campañas FBIG Ads.png' },
-            { id: 13, cat: 'produccion', titulo: '1 Video Publicitario', desc: 'Contenido 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: '1 Vídeo Publicitario.png' },
+            { id: 13, cat: 'produccion', titulo: '1 Video Publicitario', desc: 'Contenido 100% Personalizado.', precio: 699, tipo: 'unico', badge: '', theme: '', img: 'Vídeo Publicitario.png' },
             { id: 14, cat: 'produccion', titulo: '2 Videos Publicitarios', desc: 'Contenido 100% Personalizado en paquete.', precio: 999, tipo: 'unico', badge: 'Ahorro', theme: 'card-red', img: '2 vídeos Publicitarios.png' },
             { id: 15, cat: 'produccion', titulo: 'Fotografía de Productos', desc: 'Sesión para 10 productos.\nEdición pro y contenido apoyado con IA.', precio: 1499, tipo: 'unico', badge: 'IA+', theme: '', img: 'Fotografía de Productos.png' },
 
-            // SISTEMAS PRO / WEB (Se agregaron opciones BETA/PRO a todos, incluyendo E-Commerce)
-            { id: 16, cat: 'sistemas', titulo: 'RestoPOS', desc: 'Sistema de comandero para comida.', precio: 4499, tipo: 'desde', badge: 'Hot', theme: 'card-red', img: 'RestoPOS.png' },
-            { id: 17, cat: 'sistemas', titulo: 'E-Commerce', desc: 'Tienda online con carrito y métodos de pago integrados.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'E-Commerce.png' },
-            { id: 18, cat: 'sistemas', titulo: 'Landing Page', desc: 'Páginas web profesionales totalmente personalizadas.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'Landing Page.png' },
-            { id: 19, cat: 'sistemas', titulo: 'BarberPRO', desc: 'Gestión de citas, pagos y cortes para barberías.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'BarberPRO.png' },
-            { id: 20, cat: 'sistemas', titulo: 'MotoPartesPRO', desc: 'Especializado en refacciones de motos.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'MotoPartesPRO.png' },
-            { id: 21, cat: 'sistemas', titulo: 'SorteoPRO', desc: 'Venta de boletos y gestión de premios.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'SorteoPRO.png' },
-            { id: 22, cat: 'sistemas', titulo: 'InventarioPRO', desc: 'Control de entradas y salidas para empresas.', precio: 4499, tipo: 'desde', badge: '', theme: '', img: 'InventarioPRO.png' },
-            { id: 23, cat: 'sistemas', titulo: 'ChecadorPRO', desc: 'Asistencia y nómina digital personalizada.', precio: 4499, tipo: 'desde', badge: 'Útil', theme: '', img: 'ChecadorPRO.png' },
+            // SISTEMAS PRO / WEB (Se agregó clase bg-sistemas y se corrigieron nombres de imágenes)
+            { id: 16, cat: 'sistemas', titulo: 'RestoPOS', desc: 'Sistema de comandero para comida.', precio: 4499, tipo: 'desde', badge: 'Hot', theme: 'card-red bg-sistemas', img: 'RestoPOS.png' },
+            { id: 17, cat: 'sistemas', titulo: 'E-Commerce', desc: 'Tienda online con carrito y métodos de pago integrados.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'E-Commerce.png' },
+            { id: 18, cat: 'sistemas', titulo: 'Landing Page', desc: 'Páginas web profesionales totalmente personalizadas.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'Landing Page.png' },
+            { id: 19, cat: 'sistemas', titulo: 'BarberPRO', desc: 'Gestión de citas, pagos y cortes para barberías.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'BarberPRO.png' },
+            { id: 20, cat: 'sistemas', titulo: 'MotoPartesPRO', desc: 'Especializado en refacciones de motos.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'MotoPartesPRO.png' },
+            { id: 21, cat: 'sistemas', titulo: 'SorteoPRO', desc: 'Venta de boletos y gestión de premios.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'SorteoPRO.png' },
+            { id: 22, cat: 'sistemas', titulo: 'InventarioPRO', desc: 'Control de entradas y salidas para empresas.', precio: 4499, tipo: 'desde', badge: '', theme: 'bg-sistemas', img: 'InventarioPRO.png' },
+            { id: 23, cat: 'sistemas', titulo: 'ChecadorPRO', desc: 'Asistencia y nómina digital personalizada.', precio: 4499, tipo: 'desde', badge: 'Útil', theme: 'bg-sistemas', img: 'ChecadorPRO.png' },
             
             // AUTOMATIZACIÓN
             { id: 24, cat: 'bots', titulo: 'Bot Automatizado 24/7', desc: 'Bot para Facebook que responde por ti los 365 días.\nIncluye 3 automatizaciones personalizadas.', precio: 2999, tipo: 'unico', badge: '24/7', theme: 'card-red', img: 'Bot Automatizado 24 7.png' }
@@ -415,25 +421,24 @@
             
             filtrados.forEach((prod, index) => {
                 let delay = (index % 4) * 100;
-                let badgeHTML = prod.badge ? `<div class="badge ${prod.theme === 'card-red' ? 'hot' : 'best'}">${prod.badge}</div>` : '';
+                let badgeHTML = prod.badge ? `<div class="badge ${prod.theme.includes('card-red') ? 'hot' : 'best'}">${prod.badge}</div>` : '';
                 
                 let textPrice = `$${prod.precio.toLocaleString('es-MX')} <span>MXN</span>`;
                 if(prod.tipo === 'mes') textPrice += '<span>/mes</span>';
                 if(prod.tipo === 'desde') textPrice = `<span>Desde</span> $${prod.precio.toLocaleString('es-MX')}`;
                 if(prod.tipo === 'cotizar') textPrice = `<span>A Cotizar</span>`;
 
-                // Agregando Selector Beta / Pro para Sistemas (Categoria 'sistemas')
+                // Selector Beta/Pro Modificado para Sistemas
                 let variantHTML = '';
                 if (prod.cat === 'sistemas') {
                     variantHTML = `
                         <select id="variant-${prod.id}" class="system-variant">
-                            <option value="beta">BETA ($4,499 MXN)</option>
-                            <option value="pro">PRO ($7,000 - $10,000 MXN)</option>
+                            <option value="beta">Versión Beta: $4,499 MXN</option>
+                            <option value="pro">Versión Pro: $7,000 → $1,000 MXN</option>
                         </select>
                     `;
                 }
 
-                // Evitamos encodeURI que a veces falla en navegadores locales, usamos directo el string.
                 grid.innerHTML += `
                     <div class="card ${prod.theme}" data-aos="fade-up" data-aos-delay="${delay}">
                         ${badgeHTML}
@@ -464,7 +469,6 @@
             renderProductos(categoria);
         }
 
-        // Lógica del Carrito
         function toggleCart() {
             document.getElementById('cart-sidebar').classList.toggle('active');
             document.getElementById('cart-overlay').classList.toggle('active');
@@ -476,10 +480,9 @@
             // Hacemos una copia para no alterar el array principal
             let prod = { ...prodBase };
             
-            // Identificador único para el carrito (permite borrar items duplicados independientemente)
             prod.cartId = Date.now() + Math.random(); 
 
-            // Si es un sistema, verificamos la opción seleccionada
+            // Validar opción seleccionada Beta vs Pro
             if (prod.cat === 'sistemas') {
                 const selectElement = document.getElementById(`variant-${id}`);
                 const version = selectElement.value;
@@ -489,15 +492,14 @@
                     prod.precio = 4499;
                 } else if (version === 'pro') {
                     prod.titulo = `${prod.titulo} (Versión PRO)`;
-                    prod.precio = 7000; // Asignamos precio base Pro de 7000
-                    prod.tipo = 'desde';
+                    prod.precio = 1000; // Se aplica descuento indicado a 1000
+                    prod.tipo = 'unico'; // Fix visual carrito para que no diga 'desde'
                 }
             }
 
             carrito.push(prod);
             actualizarCarrito();
             
-            // Animación del botón cotizar
             const btn = document.querySelector('.cart-trigger');
             btn.style.background = 'var(--neon-green)';
             btn.style.color = 'var(--bg-black)';
@@ -521,15 +523,17 @@
 
             let html = '';
             let total = 0;
-            let esAproximado = false; // Bandera si hay precios variables/PRO
+            let esAproximado = false; 
 
             carrito.forEach((item, index) => {
                 total += item.precio;
                 if(item.tipo === 'cotizar' || item.tipo === 'desde') esAproximado = true;
 
                 let precioTexto = item.precio > 0 ? `$${item.precio.toLocaleString()}` : 'A Cotizar';
+                
+                // Mensaje en carrito de que el descuento se aplicó a la Pro
                 if (item.cat === 'sistemas' && item.titulo.includes('PRO')) {
-                    precioTexto = 'Desde $7,000';
+                    precioTexto = '$1,000 (Desc. Especial)';
                 }
                 
                 html += `
@@ -549,7 +553,6 @@
             document.getElementById('cart-total-price').innerText = totalText;
         }
 
-        // WhatsApp
         function enviarWhatsApp(e) {
             e.preventDefault();
             if(carrito.length === 0) {
